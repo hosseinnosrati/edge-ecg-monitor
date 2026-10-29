@@ -1,7 +1,6 @@
 # 🫀 Edge-ECG-Monitor: Real-Time Biomedical DSP & Edge AI Arrhythmia Detector
 
 [![Python](https://img.shields.io/badge/Python-3.9%20%7C%203.10%20%7C%203.13-blue.svg)](https://www.python.org/)
-[![Documentation PDF](https://img.shields.io/badge/Documentation-Bilingual%20PDF-informational.svg)](Edge_ECG_Monitor_Technical_Documentation.pdf)
 [![Embedded C](https://img.shields.io/badge/Firmware-ANSI%20C99%20(Zero--Malloc)-purple.svg)](models/edge_classifier.h)
 [![Dashboard](https://img.shields.io/badge/UI-Interactive%20Streamlit%20App-ff4b4b.svg)](app.py)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)

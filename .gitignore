@@ -13,6 +13,8 @@ ENV/
 # Data cache
 data/mitbih/*
 !data/mitbih/.gitkeep
+*.pdf
+docs/*.pdf
 
 # IDE & OS
 .vscode/
