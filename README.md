@@ -1,30 +1,29 @@
-# 🫀 Edge-ECG-Monitor: Real-Time Biomedical DSP & Edge AI Arrhythmia Detector
+# Edge-ECG-Monitor: Real-Time Biomedical DSP and Edge AI Arrhythmia Detector
 
 [![Python](https://img.shields.io/badge/Python-3.9%20%7C%203.10%20%7C%203.13-blue.svg)](https://www.python.org/)
-[![Embedded C](https://img.shields.io/badge/Firmware-ANSI%20C99%20(Zero--Malloc)-purple.svg)](models/edge_classifier.h)
-[![Dashboard](https://img.shields.io/badge/UI-Interactive%20Streamlit%20App-ff4b4b.svg)](app.py)
+[![Firmware](https://img.shields.io/badge/Firmware-ANSI%20C99%20(Zero--Malloc)-purple.svg)](models/edge_classifier.h)
+[![Dataset](https://img.shields.io/badge/Dataset-MIT--BIH%20PhysioNet-blue.svg)](https://physionet.org/content/mitdb/)
+[![Latency](https://img.shields.io/badge/Latency-0.12%20ms%20%2F%20Beat-green.svg)]()
+[![UI](https://img.shields.io/badge/UI-Streamlit%20Dashboard-red.svg)](app.py)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Dataset](https://img.shields.io/badge/Dataset-MIT--BIH%20PhysioNet-red.svg)](https://physionet.org/content/mitdb/)
-[![Hardware](https://img.shields.io/badge/Target-Low--Power%20Edge%20%2F%20IoT-orange.svg)]()
-[![Model Size](https://img.shields.io/badge/Model%20Size-16.3%20KB%20(C)%20%2F%2038%20KB%20(Python)-success.svg)]()
 
-A comprehensive, cross-disciplinary **Biomedical Signal Processing (DSP)** and **Edge AI / TinyML** system designed for real-time cardiac arrhythmia detection, frequency-domain autonomic nervous system (HRV) analysis, and bare-metal embedded firmware deployment.
+A real-time **Digital Signal Processing (DSP)** and **Edge AI** pipeline designed for cardiac arrhythmia detection, frequency-domain autonomic nervous system (HRV) analysis, and bare-metal embedded firmware deployment.
 
-Compliant with the **AAMI/ANSI EC57** international standard and evaluated on the benchmark **MIT-BIH Arrhythmia Database (PhysioNet)**.
+Compliant with the **AAMI/ANSI EC57** standard and evaluated on the benchmark **MIT-BIH Arrhythmia Database (PhysioNet)**.
 
 ---
 
-## 📌 Cross-Disciplinary Academic Scope
+## Design Objectives & Biomedical Context
 
-This project bridges three core engineering domains for graduate admissions (Biomedical, Telecom, and Computer Engineering):
+Continuous electrocardiogram (ECG) monitoring on wearable medical sensors requires resolving three engineering challenges:
 
-* **Biomedical Engineering (BME):** Clinical ECG morphology, Pan-Tompkins QRS detection, ventricular ectopic beat (PVC) screening, and frequency-domain Heart Rate Variability (Welch PSD, LF/HF autonomic balance).
-* **Electrical & Telecommunications (EE/DSP):** Digital IIR notch and Butterworth bandpass filtering, Nyquist anti-aliasing considerations, cubic spline non-uniform resampling, and spectral density estimation.
-* **Electrical & Computer Engineering (ECE / Embedded AI):** Ultra-compact 16 KB C99 firmware exporter (zero dynamic heap allocation, MISRA-C compliant), <175 MB RAM footprint, and an interactive real-time Streamlit dashboard.
+1. **Noise Conditioning without Morphological Distortion:** Baseline wander from patient respiration (<0.5 Hz) and electromyographic (EMG) muscle tremor (>40 Hz) severely corrupt cardiac recordings. The conditioning stage applies zero-phase IIR notch and bandpass filtering, preserving the diagnostically vital ST-segment and QRS amplitude.
+2. **Robust QRS Detection (Pan-Tompkins):** The classic Pan-Tompkins algorithm isolates steep ventricular depolarization slopes via bandpass filtering (5–15 Hz), differentiation, squaring, and moving window integration (MWI), enabling adaptive thresholding across varying patient anatomies.
+3. **On-Device Decision Making (Edge AI):** Patient privacy and battery longevity require edge classification rather than continuous cloud streaming. The decision ensemble is trained on morphological and temporal HRV features, fitting within an ultra-compact **16.3 KB C99 firmware header**.
 
 ---
 
-## 🏗️ System Architecture
+## Architecture
 
 ```mermaid
 flowchart TD
@@ -48,24 +47,24 @@ flowchart TD
     F1 --> G{"Diagnosis"}
     F2 --> G
     G -->|"Class 0"| H["Normal Sinus Rhythm (N)"]
-    G -->|"Class 1"| I["Ventricular Arrhythmia / PVC (V) ⚠️"]
+    G -->|"Class 1"| I["Ventricular Arrhythmia / PVC (V)"]
 ```
 
 ---
 
-## 📊 Live Visual Pipeline
+## Signal Processing & Beat Detection Pipeline
 
-The complete three-stage signal processing and classification workflow in action:
+The complete three-stage signal conditioning and classification workflow in action:
 
 ![ECG Detection Pipeline](assets/demo_ecg_detection.png)
 
-1. **Top (Red):** Raw ECG signal corrupted by synthetic 60 Hz powerline hum and low-frequency baseline wander (respiration artifact).
-2. **Middle (Blue):** Pan-Tompkins Moving Window Integration (MWI) envelope emphasizing high-frequency QRS energy.
-3. **Bottom (Dark & Markers):** Denoised ECG signal with AI-detected peaks. Normal beats labeled in **Green circles**, and dangerous Premature Ventricular Contractions (PVC) highlighted in **Red triangles with clinical alert annotations**.
+1. **Top Panel (Red):** Raw ECG signal corrupted by synthetic 60 Hz powerline hum and low-frequency baseline respiration drift.
+2. **Middle Panel (Blue):** Pan-Tompkins Moving Window Integration (MWI) envelope emphasizing high-frequency QRS energy.
+3. **Bottom Panel (Dark & Markers):** Denoised ECG signal with classified peaks. Normal beats marked in green, and dangerous Premature Ventricular Contractions (PVC) highlighted in red.
 
 ---
 
-## 🔬 Frequency-Domain HRV & Clinical LF/HF Ratio
+## Frequency-Domain HRV & Autonomic Analysis
 
 Heart Rate Variability (HRV) spectral decomposition evaluates autonomic nervous system (ANS) tone according to the Task Force of ESC/NASPE guidelines:
 
@@ -78,11 +77,11 @@ Computed via **Welch's Power Spectral Density (PSD)** after 4.0 Hz cubic-spline 
 
 ---
 
-## 💻 Bare-Metal Embedded C99 Firmware (`models/edge_classifier.h`)
+## Bare-Metal Embedded C99 Firmware (`models/edge_classifier.h`)
 
-To enable deployment on microcontrollers without operating systems or Python interpreters (e.g., **ARM Cortex-M0/M3/M4/M7, STM32, ESP32, Nordic nRF52**), the model exports directly into a standalone C99 header:
+To enable deployment on microcontrollers without operating systems or Python interpreters (**ARM Cortex-M0/M3/M4/M7, STM32, ESP32, Nordic nRF52**), the model exports directly into a standalone C99 header:
 
-* **Zero Dynamic Allocation:** 100% stack/static execution (no `malloc` or memory leaks).
+* **Zero Dynamic Allocation:** 100% stack/static execution (no `malloc` or memory fragmentation).
 * **Ultra-Compact Footprint:** Entire decision ensemble occupies just **16.3 KB** of flash storage.
 * **Header API:**
 ```c
@@ -97,23 +96,23 @@ float prob = edge_predict_arrhythmia_probability(raw_features);
 
 ---
 
-## ⚡ Edge Hardware Benchmark Results
+## Experimental Benchmarks
 
-Benchmarked directly on a constrained **Intel Pentium Dual-Core T2330 @ 1.60 GHz** (legacy 64-bit architecture) running standard single-thread processing:
+Benchmarked on an **Intel Pentium Dual-Core T2330 @ 1.60 GHz**:
 
-| Benchmark Metric | Measured Result | Significance for Edge / IoT |
+| Metric | Measured Value | Standard / Constraint |
 | :--- | :--- | :--- |
-| **Model Size (C99 Header)** | **16.3 KB** | Fits effortlessly on microcontrollers |
+| **Model Size (C99 Header)** | **16.3 KB** | Fits effortlessly on microcontroller flash |
 | **Model Size (Python / Joblib)** | **38.08 KB** | Ultra-lightweight edge storage |
 | **DSP Filter Latency (60s signal)** | **1.49 ms** | Negligible CPU load |
 | **Pan-Tompkins Detection Latency** | **1.19 ms** | Real-time cardiac tracking |
 | **Feature Extraction Latency** | **1.44 ms** | Rapid temporal/morphological parsing |
-| **AI Inference Latency** | **3.49 ms** | Instant classification |
+| **Inference Latency** | **3.49 ms** | Instant classification |
 | **Total Pipeline Latency (60s signal)** | **7.61 ms** | **>7,800× faster than real-time** |
-| **Average Latency per Beat** | **0.121 ms / beat** | Unnoticeable delay for live patient telemetry |
-| **Peak Memory (RAM) Consumption** | **173.6 MB** | Runs within low-cost microcomputer RAM budgets |
+| **Average Latency per Beat** | **0.121 ms / beat** | Negligible delay for live telemetry |
+| **Peak Memory Consumption** | **173.6 MB RAM** | Low-cost microcomputer RAM budgets |
 
-### Clinical Detection Accuracy (MIT-BIH Test Split)
+### Detection Accuracy (MIT-BIH Test Split)
 
 | Class | Precision | Recall (Sensitivity) | F1-Score | Support |
 | :--- | :---: | :---: | :---: | :---: |
@@ -124,7 +123,7 @@ Benchmarked directly on a constrained **Intel Pentium Dual-Core T2330 @ 1.60 GHz
 
 ---
 
-## 🚀 Quick Start
+## Getting Started
 
 ### 1. Clone the Repository
 ```bash
@@ -141,9 +140,8 @@ pip install -r requirements.txt
 ```bash
 streamlit run app.py
 ```
-*Opens a real-time web UI allowing dynamic tuning of filter cutoffs, noise injection, Welch PSD plots, and C header downloading.*
 
-### 4. Run CLI Visual Demo & Benchmarks
+### 4. Run CLI Demo & Benchmarks
 ```bash
 python run_demo.py
 python benchmark.py
@@ -156,7 +154,7 @@ python -m src.models.c_export
 
 ---
 
-## 📂 Repository Structure
+## Repository Structure
 
 ```
 edge-ecg-monitor/
@@ -192,5 +190,5 @@ edge-ecg-monitor/
 
 ---
 
-## ⚖️ License & Ethical Disclosure
-This project is licensed under the **MIT License**. It is strictly developed for **civilian biomedical monitoring, telehealth, and academic research purposes**.
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
