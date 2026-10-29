@@ -27,7 +27,7 @@ st.set_page_config(
 st.title("🫀 Edge-ECG-Monitor")
 st.markdown(
     "**Real-Time Biomedical DSP & Edge AI Arrhythmia Detector** | "
-    "*[GitHub Repository](https://github.com/hnosrati0-source/edge-ecg-monitor)*"
+    "*[GitHub Repository](https://github.com/hosseinnosrati/edge-ecg-monitor)*"
 )
 st.caption("Engineered for resource-constrained Edge & IoT medical hardware (<175 MB RAM, 38 KB model).")
 

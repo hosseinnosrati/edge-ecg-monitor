@@ -137,7 +137,7 @@ Benchmarked on an **Intel Pentium Dual-Core T2330 @ 1.60 GHz**:
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/hnosrati0-source/edge-ecg-monitor.git
+git clone https://github.com/hosseinnosrati/edge-ecg-monitor.git
 cd edge-ecg-monitor
 ```
 
