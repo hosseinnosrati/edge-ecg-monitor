@@ -192,17 +192,5 @@ edge-ecg-monitor/
 
 ---
 
-## 📜 How to Reference in Academic Applications / CV
-
-> **Real-Time Edge Biomedical DSP & TinyML Arrhythmia Detector**
-> *Developed a cross-disciplinary biomedical signal processing and embedded AI pipeline evaluated on the standard MIT-BIH PhysioNet database.*
-> * Implemented zero-phase IIR notch and Butterworth bandpass filters alongside the Pan-Tompkins QRS detector to suppress baseline wander and EMG noise.
-> * Formulated autonomic frequency-domain HRV analysis (Welch PSD, LF/HF ratio) and morphological feature extraction.
-> * Generated a standalone, zero-malloc ANSI C99 firmware header (16.3 KB) for bare-metal ARM Cortex-M microcontrollers.
-> * Benchmarked real-time performance on constrained dual-core hardware: **0.12 ms/beat latency** (>7,800× real-time speedup) with **<175 MB RAM footprint** and 100% sensitivity on ventricular arrhythmias (PVC).
-> * Interactive Dashboard & Source: `https://github.com/hnosrati0-source/edge-ecg-monitor`
-
----
-
 ## ⚖️ License & Ethical Disclosure
 This project is licensed under the **MIT License**. It is strictly developed for **civilian biomedical monitoring, telehealth, and academic research purposes**.
