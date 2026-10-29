@@ -129,3 +129,4 @@ def compute_hrv_spectral_metrics(
         "frequencies": freqs,
         "psd": psd * 1e6  # in ms^2/Hz
     }
+

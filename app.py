@@ -206,3 +206,4 @@ with tab3:
         "Metric": ["Model Size", "Inference Latency", "Pipeline Speedup", "RAM Footprint", "MIT-BIH Sensitivity"],
         "Value": ["38.08 KB (16.3 KB in C)", "0.12 ms / beat", ">7,800× real-time", "<175 MB", "100.0%"]
     })
+
