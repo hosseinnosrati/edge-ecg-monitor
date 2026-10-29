@@ -87,7 +87,7 @@ Benchmarked directly on a constrained **Intel Pentium Dual-Core T2330 @ 1.60 GHz
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/hnosrati0/edge-ecg-monitor.git
+git clone https://github.com/hnosrati0-source/edge-ecg-monitor.git
 cd edge-ecg-monitor
 ```
 
@@ -152,9 +152,10 @@ edge-ecg-monitor/
 > * Implemented zero-phase IIR notch (50/60Hz) and Butterworth bandpass filters alongside the classic Pan-Tompkins algorithm for robust QRS detection under severe baseline drift and EMG noise.
 > * Extracted temporal (RR intervals, HRV) and morphological features into a compact 38 KB classifier achieving 100% sensitivity on ventricular ectopic beats.
 > * Validated real-time feasibility on resource-constrained dual-core edge hardware, recording **0.12 ms/beat latency** (>7,800× real-time speedup) and **<175 MB RAM footprint**.
-> * Repository: `github.com/hnosrati0/edge-ecg-monitor`
+> * Repository: `https://github.com/hnosrati0-source/edge-ecg-monitor`
 
 ---
 
 ## ⚖️ License & Ethical Disclosure
 This project is licensed under the **MIT License**. It is strictly developed for **civilian biomedical monitoring, telehealth, and educational purposes**.
+

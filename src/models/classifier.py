@@ -63,3 +63,4 @@ class EdgeArrhythmiaClassifier:
         instance.scaler = checkpoint["scaler"]
         instance.classes_ = checkpoint["classes"]
         return instance
+

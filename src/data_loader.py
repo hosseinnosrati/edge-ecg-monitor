@@ -74,3 +74,4 @@ def load_record(record_name: str = "100", data_dir: str = "data/mitbih") -> Tupl
 
 if __name__ == "__main__":
     download_sample_mitbih_records()
+
