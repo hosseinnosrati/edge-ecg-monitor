@@ -4,12 +4,22 @@
 [![Firmware](https://img.shields.io/badge/Firmware-ANSI%20C99%20(Zero--Malloc)-purple.svg)](models/edge_classifier.h)
 [![Dataset](https://img.shields.io/badge/Dataset-MIT--BIH%20PhysioNet-blue.svg)](https://physionet.org/content/mitdb/)
 [![Latency](https://img.shields.io/badge/Latency-0.12%20ms%20%2F%20Beat-green.svg)]()
+[![Preprint DOI](https://img.shields.io/badge/Preprint%20DOI-10.13140%2FRG.2.2.16561.75366-0284c7.svg)](https://doi.org/10.13140/RG.2.2.16561.75366)
 [![UI](https://img.shields.io/badge/UI-Streamlit%20Dashboard-red.svg)](app.py)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 A real-time **Digital Signal Processing (DSP)** and **Edge AI** pipeline designed for cardiac arrhythmia detection, frequency-domain autonomic nervous system (HRV) analysis, and bare-metal embedded firmware deployment.
 
 Compliant with the **AAMI/ANSI EC57** standard and evaluated on the benchmark **MIT-BIH Arrhythmia Database (PhysioNet)**.
+
+---
+
+### 📄 Research Preprint & Citation
+
+This architecture and experimental benchmarks are formally documented in the research manuscript:
+
+> **Hossein Nosrati**, *"Low-Latency Deterministic Arrhythmia Telemetry via Zero-Phase IIR Filtering and Static Decision Forests on Resource-Constrained Edge Microcontrollers,"* ResearchGate Preprint, Oct. 2026.  
+> **DOI:** [10.13140/RG.2.2.16561.75366](https://doi.org/10.13140/RG.2.2.16561.75366) &bull; **License:** [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
 
 ---
 
